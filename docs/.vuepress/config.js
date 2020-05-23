@@ -22,7 +22,7 @@ module.exports = {
       { text: '博文', link: '/pages/blog/' }, // 内部链接 以docs为根目录
       // { text: '面试题', link: '/pages/interview/' },
       { text: '代码块', link: '/pages/code/'},
-      { text: 'GitHub', link: 'https://github.com/aaaxiu'}  
+      { text: 'GitHub', link: 'https://github.com/aaaxiu/aaaxiu.github.io'}  
     ],
     //侧边导航栏：会根据当前的文件路径是否匹配侧边栏数据，自动显示/隐藏
     sidebar: {

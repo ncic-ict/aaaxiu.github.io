@@ -2,7 +2,7 @@
  * @Description: README
  * @Author: 林河
  * @Date: 2020-05-23 16:21:12
- * @LastEditTime: 2020-05-23 17:27:24
+ * @LastEditTime: 2020-05-23 18:24:26
  * @LastEditors: 林河
 --> 
 # 林河前端之路
@@ -14,6 +14,8 @@
 1. `yarn dev` 直接启动项目，如果没有全局安装 `yarn` 和 `vuepress` 先把它们安装再执行（ vuepress 有默认的热更新模块，但修改 .vuepress/config.js 配置文件并不会同步更新 ）。
 
 2. 执行 `yarn build` 打包执行本地打包。
+
+有两个分支， `master` 存放的是生成的静态文件， `source_code` 存放的是网站的原始文件，一般来说不需要去切换分支，只需要在 `source_code` 上开发就好，完成之后提交和 push ，生成静态文件只需要执行 `yarn deploy` 即可（无论你当前在哪个分支，它执行的是项目目录下的 deploy.sh 文件 ）。但是需要注意的是 `yarn deploy` 依赖于 GitBash。也就是说要在 git 的命令行中运行。 
 
 3. 执行 `yarn deploy` 打包项目并发布到 github 。
 
