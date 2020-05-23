@@ -53,7 +53,8 @@ module.exports = {
           title: 'Git',   // 一级菜单名称
           collapsable: false, // false为默认展开菜单, 默认值true是折叠,
           children: [
-            ['git/Git常用命令.md', 'Git常用命令'],  // [跳转地址，侧边栏名称]
+            ['git/Git常用命令.md', 'Git常用命令'], 
+            ['git/git生成多个公钥.md', 'git生成多个公钥'], 
           ]
         },
         {

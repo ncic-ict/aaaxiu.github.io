@@ -2,7 +2,7 @@
  * @Description: README
  * @Author: 林河
  * @Date: 2020-05-23 16:21:12
- * @LastEditTime: 2020-05-23 18:24:26
+ * @LastEditTime: 2020-05-23 19:17:22
  * @LastEditors: 林河
 --> 
 # 林河前端之路
@@ -48,3 +48,43 @@ export default = {
 ```
 
 3. 在 blog/index.md 中添加对应的文件路径（这是 tabs 的默认页面，可一览整个目录下的文章，方便快速跳转 ）。
+
+### 常用功能
+
+1. 使用标签图片方式，图片存放到 docs/.vuepress/public 下（这个目录下都是静态文件）。
+
+```
+<img :src="$withBase('/code.jpg')" alt="code">
+```
+
+2. 使用表情：
+
+:100:
+:grinning:
+:pout:
+:pray:
+:+1:
+:selfie:
+:man_teacher:
+:ok_woman:
+:couplekiss_man_woman:
+:mouse:
+:pig:
+:sun_with_face:
+:eggplant:
+
+3. vue 风格提醒
+
+```
+::: tip
+这是一个提示
+:::
+```
+
+**输出**
+
+::: tip
+这是一个提示
+:::
+
+另外还有 warning 、danger 、 details 。

@@ -1,3 +1,10 @@
+<!--
+ * @Description: 
+ * @Author: 林河
+ * @Date: 2020-05-23 16:21:12
+ * @LastEditTime: 2020-05-23 18:59:52
+ * @LastEditors: 林河
+--> 
 ### JavaScript
 + [前端实现图片压缩上传](./javascript/前端实现图片压缩上传.md)
 + [数组去重方式](./javascript/数组去重方式.md)
@@ -13,6 +20,7 @@
 
 ### Git
 + [Git常用命令](./git/Git常用命令.md)
++ [git生成多个公钥](./git/git生成多个公钥.md)
 
 ### 其他
 + [跨域解决方案](./others/跨域解决方案.md)
