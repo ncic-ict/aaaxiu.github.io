@@ -2,7 +2,7 @@
  * @Description: README
  * @Author: 林河
  * @Date: 2020-05-23 16:21:12
- * @LastEditTime: 2020-05-23 19:20:57
+ * @LastEditTime: 2020-05-23 19:24:00
  * @LastEditors: 林河
 --> 
 # 林河前端之路
@@ -57,7 +57,7 @@
   <img :src="$withBase('/code.jpg')" alt="code">
   ```
 
-2. 使用表情：
+2. 使用表情，全部表情在 [markdown-it-emoji](https://github.com/markdown-it/markdown-it-emoji/blob/master/lib/data/full.json)
 
   :100:
   :grinning:
@@ -72,6 +72,8 @@
   :pig:
   :sun_with_face:
   :eggplant:
+
+
 
 3. vue 风格提醒
 

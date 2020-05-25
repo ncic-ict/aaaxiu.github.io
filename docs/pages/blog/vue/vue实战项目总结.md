@@ -221,6 +221,30 @@ export default {
 }
 ```
 
-正在更新...
+### vue中调用防抖或者节流
+
+一般的，定义方法就这样
+
+``` js
+methods: {
+    handleRun() {
+        // ...
+    }
+}
+```
+
+那么，如果这个方法要加防抖必须这样：
+
+``` js
+import {debounce} from '@/utils.js'
+
+export default {
+    methods: {
+        handleRun: debounce(function () {
+            // ...
+        })
+    }
+}
+```
 
 ####
