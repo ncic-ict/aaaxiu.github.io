@@ -4,7 +4,7 @@ module.exports = {
   base: '/', // github
   // 注入到当前页面的 HTML <head> 中的标签
   head: [
-    ['link', { rel: 'icon', href: '/logo.png' }],
+    ['link', { rel: 'icon', href: '/linhe.jpg' }],
   ],
   base: '/', // 这是部署到github相关的配置 下面会讲
   // markdown: {
@@ -16,7 +16,7 @@ module.exports = {
     activeHeaderLinks: false, // 不改变页面hash值（优化项）
     sidebarDepth: 2, //  设置侧边导航自动提取markdown文件标题的层级，默认1为h2层级
     // lastUpdated: 'Last Updated',// 文档更新时间：每个文件git最后提交的时间,
-    logo: '/logo.png',
+    logo: '/linhe.jpg',
     nav:[
       { text: 'Home', link: '/'},
       { text: '博文', link: '/pages/blog/' }, // 内部链接 以docs为根目录
@@ -66,7 +66,7 @@ module.exports = {
             ['others/彻底理解浏览器的缓存机制.md', '彻底理解浏览器的缓存机制'],
             ['others/在第三方页面调用微信接口.md', '在第三方页面调用微信接口'],
             ['others/移动端遮罩阻止滚动方案.md', '移动端遮罩阻止滚动方案'],
-            ['others/css伪类.md', 'css伪类']
+            ['others/css3伪类.md', 'css3伪类']
           ]
         }
       ],

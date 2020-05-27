@@ -1,6 +1,6 @@
 ---
 home: true
-heroImage: /logo.png
+heroImage: /linhe.jpg
 actionText: Get Started →
 actionLink: /pages/blog/
 features:

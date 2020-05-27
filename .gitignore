@@ -2,4 +2,5 @@
 node_modules/
 # 生成的目录
 docs/.vuepress/dist
-
+# vuepress temp file
+.temp

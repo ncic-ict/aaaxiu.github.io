@@ -137,7 +137,7 @@ export default {
 export default {
     data () {
         return {
-            backgroundUrl: require('@/assets/images/logo.png')
+            backgroundUrl: require('@/assets/images/linhe.jpg')
         }
     }
 }

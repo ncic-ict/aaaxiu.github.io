@@ -46,6 +46,7 @@ $ git clone [url]
 + 以问号"?"通配单个字符，即匹配一个任意字符；
 + 以方括号"[]"包含单个字符的匹配列表，即匹配任何一个列在方括号中的字符。比如[abc]表示要么匹配一个a，要么匹配一个b，要么匹配一个c；如果在方括号中使用短划线分隔两个字符，表示所有在这两个字符范围内的都可以匹配。比如[0-9]表示匹配所有0到9的数字，[a-z]表示匹配任意的小写字母）。
 + 以叹号"!"表示不忽略(跟踪)匹配到的文件或目录，即要忽略指定模式以外的文件或目录，可以在模式前加上惊叹号（!）取反。需要特别注意的是：如果文件的父目录已经被前面的规则排除掉了，那么对这个文件用"!"规则是不起作用的。也就是说"!"开头的模式表示否定，该文件将会再次被包含，如果排除了该文件的父级目录，则使用"!"也不会再次被包含。可以使用反斜杠进行转义。
+
 **需要谨记：git对于.ignore配置文件是按行从上到下进行规则匹配的，意味着如果前面的规则匹配的范围更大，则后面的规则将不会生效；**
 
 | 实例 | 解释 |
@@ -74,7 +75,8 @@ $ git clone [url]
 名词解释: Workspace(工作区), Index/Stage(暂存区), Repository(仓库区), Remote(远程仓库)
 
 1. 增加/删除文件
-```js
+
+``` git {8}
 # 添加指定文件到暂存区
 $ git add [file1] [file2] ...
 
@@ -99,7 +101,8 @@ $ git mv [file-original] [file-renamed]
 ```
 
 2. 代码提交
-```js
+
+``` git {2,8,15}
 # 提交暂存区到仓库区
 $ git commit -m [message]
 
@@ -121,7 +124,8 @@ $ git commit --amend [file1] [file2] ...
 ```
 
 3. 分支
-```js
+
+``` git {2,8,11,14,23,32}
 # 列出所有本地分支
 $ git branch
 
@@ -167,7 +171,8 @@ $ git branch -dr [remote/branch]
 ```
 
 4. 标签
-```js
+
+``` git
 # 列出所有tag
 $ git tag
 
@@ -197,7 +202,8 @@ $ git checkout -b [branch] [tag]
 ```
 
 5. 查看信息
-```js
+
+``` git
 # 显示有变更的文件
 $ git status
 
@@ -261,7 +267,8 @@ $ git reflog
 ```
 
 6. 远程同步
-```js
+
+``` git {14,17}
 # 下载远程仓库的所有变动
 $ git fetch [remote]
 
@@ -288,7 +295,8 @@ $ git push [remote] --all
 ```
 
 7. 撤销
-```js
+
+``` git {8,14}
 # 恢复暂存区的指定文件到工作区
 $ git checkout [file]
 
@@ -323,25 +331,31 @@ $ git stash pop
 ```
 
 ### 常见错误
+
 1. 用户名或密码错误, 项目好好地突然报错, 原来是在gitee上重新设置了邮箱地址造成的
-```js
+
+``` git
 $ git push origin master
 remote: Incorrect username or password ( access token )
 fatal: Authentication failed for 'https://gitee.com/gavin_d/xxxxxx.git/'
 ```
+
 方法: 打开电脑的控制面板-> 用户账户 -> 管理windows凭证, 找到普通凭证中自己的帐号信息, 填入正确的用户名和密码保存即可
 
 2. 404 Not Found , 修改了用户名后引发了很多问题
-```js
+
+``` js
 ERROR: Repository not found.
 fatal: Could not read from remote repository.
 
  Please make sure you have the correct access rights
  and the repository exists.
 ```
+
 方法: 输入`git remote set-url origin git@gitee.com:xxxxxx/xxxxxx.git`, 你的新仓库地址
 
 参考文献:
+
 + [常用 Git 命令清单](http://www.ruanyifeng.com/blog/2015/12/git-cheat-sheet.html)
 + [git忽略提交规则](https://www.cnblogs.com/kevingrace/p/5690241.html)
 + [git教程](https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/)
