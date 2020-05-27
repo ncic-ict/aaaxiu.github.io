@@ -2,7 +2,7 @@
  * @Description: README
  * @Author: 林河
  * @Date: 2020-05-23 16:21:12
- * @LastEditTime: 2020-05-26 18:53:03
+ * @LastEditTime: 2020-05-27 17:02:52
  * @LastEditors: 林河
 --> 
 # 林河前端之路
@@ -85,4 +85,3 @@
 
   另外还有 warning 、danger 、 details 。
 
-接下来：前端传输数据方式统计、浮点数运算误差。

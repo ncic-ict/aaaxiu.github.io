@@ -1,3 +1,10 @@
+/*
+ * @Description: 
+ * @Author: 林河
+ * @Date: 2020-05-23 16:21:12
+ * @LastEditTime: 2020-05-27 17:03:41
+ * @LastEditors: 林河
+ */ 
 module.exports = {
   title: '林河前端之路',
   description: '前端笔记和面试整理',
@@ -66,7 +73,8 @@ module.exports = {
             ['others/彻底理解浏览器的缓存机制.md', '彻底理解浏览器的缓存机制'],
             ['others/在第三方页面调用微信接口.md', '在第三方页面调用微信接口'],
             ['others/移动端遮罩阻止滚动方案.md', '移动端遮罩阻止滚动方案'],
-            ['others/css3伪类.md', 'css3伪类']
+            ['others/css3伪类.md', 'css3伪类'],
+            ['others/Content-type的几种常见类型.md', 'Content-type的几种常见类型'],
           ]
         }
       ],
@@ -78,24 +86,12 @@ module.exports = {
             ['常用scss函数表.md', '常用scss函数表'],
             ['公共方法汇总.md', '公共方法汇总'],
             ['椭圆运动轨迹.md', '椭圆运动轨迹'],
-            ['一行代码实现时间戳转时分秒.md', '一行代码实现时间戳转时分秒']
+            ['一行代码实现时间戳转时分秒.md', '一行代码实现时间戳转时分秒'],
+            ['浮点数运算误差.md', '浮点数运算误差'],
             // 代码块页添加其他文章。。。
           ]
         }
       ],
-      // '/pages/interview/': [
-      //   {
-      //     title: 'Interview',
-      //     collapsable: false,
-      //     children: [
-      //       ['数组去重方式.md', '数组去重方式'], // [文件路径，侧边栏名称]
-      //       ['VUE面试题.md', 'VUE面试题'],
-      //       ['encodeURI和encodeURIComponent.md', 'encodeURI和encodeURIComponent'],
-      //       ['原型和原型链.md', '原型和原型链']
-      //     ]
-      //   }
-      // ]
-      
       //...可添加多个不同的侧边栏，不同页面会根据路径显示不同的侧边栏
     }
   }
