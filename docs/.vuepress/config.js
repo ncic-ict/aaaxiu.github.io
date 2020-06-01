@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: 林河
  * @Date: 2020-05-23 16:21:12
- * @LastEditTime: 2020-05-27 17:03:41
+ * @LastEditTime: 2020-06-01 16:53:59
  * @LastEditors: 林河
  */ 
 module.exports = {
@@ -88,6 +88,7 @@ module.exports = {
             ['椭圆运动轨迹.md', '椭圆运动轨迹'],
             ['一行代码实现时间戳转时分秒.md', '一行代码实现时间戳转时分秒'],
             ['浮点数运算误差.md', '浮点数运算误差'],
+            ['isEqual.md', 'isEqual'],
             // 代码块页添加其他文章。。。
           ]
         }
