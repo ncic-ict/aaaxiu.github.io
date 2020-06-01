@@ -2,14 +2,14 @@
  * @Description: README
  * @Author: 林河
  * @Date: 2020-05-23 16:21:12
- * @LastEditTime: 2020-05-27 17:02:52
+ * @LastEditTime: 2020-06-01 16:59:33
  * @LastEditors: 林河
 --> 
 # 林河前端之路
 
 [地址](https://aaaxiu.github.io)
 
-### 项目启动方式和打包方式
+### 项目启动和打包方式
 
 1. `yarn dev` 直接启动项目，如果没有全局安装 `yarn` 和 `vuepress` 先把它们安装再执行（ vuepress 有默认的热更新模块，但修改 .vuepress/config.js 配置文件并不会同步更新 ）。
 

@@ -2,12 +2,12 @@
  * @Description: 
  * @Author: 林河
  * @Date: 2020-05-23 16:21:12
- * @LastEditTime: 2020-06-01 16:53:59
+ * @LastEditTime: 2020-06-01 16:59:11
  * @LastEditors: 林河
  */ 
 module.exports = {
   title: '林河前端之路',
-  description: '前端笔记和面试整理',
+  description: '前端笔记整理',
   base: '/', // github
   // 注入到当前页面的 HTML <head> 中的标签
   head: [
