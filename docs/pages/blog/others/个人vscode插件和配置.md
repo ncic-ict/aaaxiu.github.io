@@ -5,73 +5,85 @@
 
 
 ### 插件
-1. **Auto Close Tag**
++ **Auto Close Tag**
 
     自动闭合HTML标签
 
-2. **Beautify**
++ **Beautify**
 
     美化javascript，JSON，CSS，Sass，和HTML在Visual Studio代码
     
-3. **Better Comments**
++ **Better Comments**
 
     注释插件
 
-4. **Bracket Pair Colorizer**
++ **Bracket Pair Colorizer**
     
     允许使用颜色标识匹配的括号
 
-5. **Chinese (Simplified) Language Pack for Visual Studio Code** 
++ **Chinese (Simplified) Language Pack for Visual Studio Code** 
 
     适用于 VS Code 的中文（简体）语言包
     
-6. **Debugger for Chrome** 
++ **Debugger for Chrome** 
 
     用于在Google Chrome浏览器或支持Chrome DevTools协议的其他目标中调试JavaScript代码的VS Code扩展
     
-7. **ESLint**
++ **ESLint**
 
     提高代码可读性、统一性，适合协作开发
 
-8. **GitLens — Git supercharged**
++ **GitLens — Git supercharged**
 
     增强Visual Studio代码内置的Git功能
+
++ **koroFileHeader**
+
+    在vscode中用于生成文件头部注释和函数注释的插件
+
++ **language-stylus**
+
+    支持stylus高亮
     
-9. **Markdown Preview Enhanced**
++ **Markdown Preview Enhanced**
 
     Markdown 预览
     
-10. **npm**
++ **npm**
 
     支持运行文件中定义的npm脚本package.json并根据定义的依赖项验证已安装的模块。
     
-11. **npm Intellisense**
++ **npm Intellisense**
 
     在import语句中自动填充npm模块
+
++ **Panda Theme**
+
+    熊猫主题
     
-12. **Path Intellisense**
++ **Path Intellisense**
 
     自动填充文件名
     
-13. **Sass**
++ **Sass**
 
     scss插件
     
-14. **Vetur**
++ **Vetur**
 
     vue工具
 
-15. **Vue 2 Snippets**
++ **vscode-icons**
+
+    icon插件
+
++ **Vue 2 Snippets**
 
     vue 2.x 语法提示
     
-16. **React-Native/React/Redux snippets for es6/es7**
++ **React-Native/React/Redux snippets for es6/es7**
 
     react 语法插件
-    
-17. **koroFileHeader**
-
-    注释插件，为文件添加头部注释，适合协作开发
 
 
     
@@ -84,9 +96,9 @@
     // 控制折行的方式。on: 将在视区宽度处换行
     "editor.wordWrap": "on",
     // 控制行高
-    "editor.lineHeight": 24,
+    "editor.lineHeight": 25,
     // 控制字体系列
-    "editor.fontFamily": "Lucida Console, Lucida Sans Typewriter, Consolas, Monaco, Inziu Iosevka J",
+    "editor.fontFamily": "Operator Mono Light, Lucida Console, Lucida Sans Typewriter, Consolas, Monaco, Inziu Iosevka J",
     // 以像素为单位控制字号
     "editor.fontSize": 15,
     // 控制光标的动画样式
@@ -104,7 +116,7 @@
     // 图标
     "workbench.iconTheme": "vscode-icons",
     // 默认使用的终端
-    "terminal.integrated.shell.windows": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+    "terminal.integrated.shell.windows": "C:\\Program Files\\Git\\bin\\bash.exe",
     //  一组语言标识符指定要验证的文件
     "eslint.validate": [ "javascript", "javascriptreact", "vue" ],
     // 自动添加文件头注释，快捷键ctrl+alt+i
@@ -115,13 +127,12 @@
         "LastEditTime": "Do not edit",
         "LastEditors": "林河"
     },
+    "workbench.colorTheme": "Panda Syntax",
 }
 ```
 
-### 主题和图标
-主题和图标网上有太多了, 我使用的是默认主题，还是这个耐看
+### 主题
 
-效果图:
+上面的配置文件里有--- [Panda Syntax](https://marketplace.visualstudio.com/items?itemName=tinkertrain.theme-panda)
 
-![](../images/6.png)
 
