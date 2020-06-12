@@ -26,9 +26,9 @@ module.exports = {
     logo: '/linhe.jpg',
     nav:[
       { text: 'Home', link: '/'},
-      { text: '博文', link: '/pages/blog/' }, // 内部链接 以docs为根目录
+      { text: '博文', link: '/pages/blog/javascript/前端实现图片压缩上传.md' }, // 内部链接 以docs为根目录
       { text: '读JavaScript高级程序设计', link: '/pages/professionalJavaScript/' },
-      { text: '代码块', link: '/pages/code/'},
+      { text: '代码块', link: '/pages/code/一行代码实现时间戳转时分秒.md'},
       { text: 'GitHub', link: 'https://github.com/aaaxiu'}  
     ],
     //侧边导航栏：会根据当前的文件路径是否匹配侧边栏数据，自动显示/隐藏
@@ -84,10 +84,10 @@ module.exports = {
           title: '代码块', 
           collapsable: false,
           children: [
+            ['一行代码实现时间戳转时分秒.md', '一行代码实现时间戳转时分秒'],
+            ['椭圆运动轨迹.md', '椭圆运动轨迹'],
             ['常用scss函数表.md', '常用scss函数表'],
             ['公共方法汇总.md', '公共方法汇总'],
-            ['椭圆运动轨迹.md', '椭圆运动轨迹'],
-            ['一行代码实现时间戳转时分秒.md', '一行代码实现时间戳转时分秒'],
             ['浮点数运算误差.md', '浮点数运算误差'],
             ['isEqual.md', 'isEqual'],
             // 代码块页添加其他文章。。。
