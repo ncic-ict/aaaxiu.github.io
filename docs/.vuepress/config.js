@@ -14,22 +14,22 @@ module.exports = {
     ['link', { rel: 'icon', href: '/linhe.jpg' }],
   ],
   base: '/', // 这是部署到github相关的配置 下面会讲
-  // markdown: {
-  //   lineNumbers: true // 代码块显示行号
-  // },
+  port: 4396,
+  extraWatchFiles: [
+    '.vuepress/config.js', // 使用相对路径
+  ],
   themeConfig: {
     activeHeaderLinks: false, // 默认值：true
     smoothScroll: true, // 启动页面滚动
     activeHeaderLinks: false, // 不改变页面hash值（优化项）
     sidebarDepth: 2, //  设置侧边导航自动提取markdown文件标题的层级，默认1为h2层级
-    // lastUpdated: 'Last Updated',// 文档更新时间：每个文件git最后提交的时间,
     logo: '/linhe.jpg',
     nav:[
       { text: 'Home', link: '/'},
       { text: '博文', link: '/pages/blog/' }, // 内部链接 以docs为根目录
-      // { text: '面试题', link: '/pages/interview/' },
+      { text: '读JavaScript高级程序设计', link: '/pages/professionalJavaScript/' },
       { text: '代码块', link: '/pages/code/'},
-      { text: 'GitHub', link: 'https://github.com/aaaxiu/aaaxiu.github.io'}  
+      { text: 'GitHub', link: 'https://github.com/aaaxiu'}  
     ],
     //侧边导航栏：会根据当前的文件路径是否匹配侧边栏数据，自动显示/隐藏
     sidebar: {
@@ -57,11 +57,12 @@ module.exports = {
           ]
         },
         {
-          title: 'Git',   // 一级菜单名称
-          collapsable: false, // false为默认展开菜单, 默认值true是折叠,
+          title: 'Git',   
+          collapsable: false, 
           children: [
             ['git/Git常用命令.md', 'Git常用命令'], 
-            ['git/git生成多个公钥.md', 'git生成多个公钥'], 
+            ['git/Git配置和错误.md', 'Git配置和错误'], 
+            ['git/Git生成多个公钥.md', 'Git生成多个公钥'], 
           ]
         },
         {
@@ -93,6 +94,15 @@ module.exports = {
           ]
         }
       ],
+      '/pages/professionalJavaScript/': [
+        {
+          title: '第一章',
+          collapsable: false,
+          children: [
+            ['01/变量.md', '变量']
+          ]
+        }
+      ]
       //...可添加多个不同的侧边栏，不同页面会根据路径显示不同的侧边栏
     }
   }

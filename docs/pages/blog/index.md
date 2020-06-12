@@ -20,7 +20,8 @@
 
 ### Git
 + [Git常用命令](./git/Git常用命令.md)
-+ [git生成多个公钥](./git/git生成多个公钥.md)
++ [Git配置和错误](./git/Git配置和错误.md)
++ [Git生成多个公钥](./git/Git生成多个公钥.md)
 
 ### 其他
 + [跨域解决方案](./others/跨域解决方案.md)

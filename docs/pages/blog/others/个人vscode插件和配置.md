@@ -3,7 +3,6 @@
 
 > vscode是一款非常好的编辑器, 它的好很大一部分取决于丰富的插件库, 由于安装的插件比较多, 配置也比较多(个人喜欢瞎弄), 这里做一个插件和配置的备份, 纯粹个人配置, 做个参考
 
-
 ### 插件
 + **Auto Close Tag**
 
@@ -134,5 +133,3 @@
 ### 主题
 
 上面的配置文件里有--- [Panda Syntax](https://marketplace.visualstudio.com/items?itemName=tinkertrain.theme-panda)
-
-
