@@ -90,43 +90,32 @@
 
 ```json
 {
-    // 一个制表符等于的空格数
     "editor.tabSize": 2,
     // 控制折行的方式。on: 将在视区宽度处换行
     "editor.wordWrap": "on",
-    // 控制行高
     "editor.lineHeight": 25,
-    // 控制字体系列
-    "editor.fontFamily": "Operator Mono Light, Lucida Console, Lucida Sans Typewriter, Consolas, Monaco, Inziu Iosevka J",
-    // 以像素为单位控制字号
-    "editor.fontSize": 15,
-    // 控制光标的动画样式
-    "editor.cursorBlinking": "expand",
+    "editor.fontFamily": "operator Mono Light, Lucida Console, Monaco",
+    "terminal.integrated.fontFamily": "Courier New",
+    "editor.letterSpacing": 0.5,
+    "editor.fontSize": 16,
     // 渲染每行的实际字符，而不是色块
     "editor.minimap.renderCharacters": false,
+    "editor.fontLigatures": true,
     // 自动保存
     "files.autoSave": "onFocusChange",
     // 启用后，保存文件时在文件末尾插入一个最终新行
     "files.insertFinalNewline": true,
-    // 启用后，将在保存文件时剪裁尾随空格。
-    "files.trimTrailingWhitespace": true,
     // 配置默认使用的设置编辑器
     "workbench.settings.editor": "json",
     // 图标
     "workbench.iconTheme": "vscode-icons",
     // 默认使用的终端
     "terminal.integrated.shell.windows": "C:\\Program Files\\Git\\bin\\bash.exe",
-    //  一组语言标识符指定要验证的文件
-    "eslint.validate": [ "javascript", "javascriptreact", "vue" ],
-    // 自动添加文件头注释，快捷键ctrl+alt+i
-    "fileheader.customMade": {
-        "Description": "",
-        "Author": "林河",
-        "Date": "Do not edit",
-        "LastEditTime": "Do not edit",
-        "LastEditors": "林河"
-    },
     "workbench.colorTheme": "Panda Syntax",
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true
+    },
+    "gitlens.views.repositories.files.layout": "tree"
 }
 ```
 
