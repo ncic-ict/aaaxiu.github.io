@@ -26,7 +26,7 @@ module.exports = {
     logo: '/linhe.jpg',
     nav:[
       { text: 'Home', link: '/'},
-      { text: '博文', link: '/pages/blog/javascript/前端实现图片压缩上传.md' }, // 内部链接 以docs为根目录
+      { text: '博文', link: '/pages/blog/javascript/webpack配置指南.md' }, // 内部链接 以docs为根目录
       { text: '读JavaScript高级程序设计', link: '/pages/professionalJavaScript/' },
       { text: '代码块', link: '/pages/code/一行代码实现时间戳转时分秒.md'},
       { text: 'GitHub', link: 'https://github.com/aaaxiu'}  
@@ -38,6 +38,7 @@ module.exports = {
           title: 'JavaScript',   // 一级菜单名称
           collapsable: false, // false为默认展开菜单, 默认值true是折叠,
           children: [
+            ['javascript/webpack配置指南.md', 'webpack配置指南'],  // [跳转地址，侧边栏名称]
             ['javascript/前端实现图片压缩上传.md', '前端实现图片压缩上传'],  // [跳转地址，侧边栏名称]
             ['javascript/数组去重方式.md', '数组去重方式'], // [文件路径，侧边栏名称]
             ['javascript/encodeURI和encodeURIComponent.md', 'encodeURI和encodeURIComponent'],
