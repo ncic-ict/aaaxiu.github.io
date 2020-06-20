@@ -5,6 +5,8 @@
 
 名词解释: **Workspace(工作区)**, **Index/Stage(暂存区)**, **Repository(仓库区)**, **Remote(远程仓库)**
 
+- HEAD 表示当前活跃分支的游标。你当前在哪儿，HEAD就指向哪儿。
+
 1. 增加/删除文件
 
 ``` git {8}
@@ -17,23 +19,16 @@ $ git add [dir]
 # 添加当前目录的所有文件到暂存区
 $ git add .
 
-# 添加每个变化前，都会要求确认
-# 对于同一个文件的多处变化，可以实现分次提交
-$ git add -p
-
 # 删除工作区文件，并且将这次删除放入暂存区
 $ git rm [file1] [file2] ...
 
 # 停止追踪指定文件，但该文件会保留在工作区
 $ git rm --cached [file]
-
-# 改名文件，并且将这个改名放入暂存区
-$ git mv [file-original] [file-renamed]
 ```
 
 2. 代码提交
 
-``` git {2,8,15}
+``` git {2,15}
 # 提交暂存区到仓库区
 $ git commit -m [message]
 
@@ -56,7 +51,7 @@ $ git commit --amend [file1] [file2] ...
 
 3. 分支
 
-``` git {2,8,11,14,23,32,38,41,44}
+``` git {14,32,38,41}
 # 列出所有本地分支
 $ git branch
 
@@ -69,20 +64,14 @@ $ git branch -a
 # 新建一个分支，但依然停留在当前分支
 $ git branch [branch-name]
 
-# 新建一个分支，并切换到该分支
+# 新建一个分支，并切换到该分支，git2.23以后也可以使用`git switch -c [branch]`
 $ git checkout -b [branch]
-
-# 新建一个分支，指向指定commit
-$ git branch [branch] [commit]
 
 # 新建一个分支，与指定的远程分支建立追踪关系
 $ git branch --track [branch] [remote-branch]
 
-# 切换到指定分支，并更新工作区
+# 切换到指定分支，并更新工作区，git2.23以后也可以使用`git switch [branch-name]`
 $ git checkout [branch-name]
-
-# 切换到上一个分支
-$ git checkout -
 
 # 建立追踪关系，在现有分支与指定的远程分支之间
 $ git branch --set-upstream [branch] [remote-branch]
@@ -90,18 +79,17 @@ $ git branch --set-upstream [branch] [remote-branch]
 # 合并指定分支到当前分支
 $ git merge [branch]
 
-# 选择一个commit，合并进当前分支
-$ git cherry-pick [commit]
-
 # 删除分支
 $ git branch -d [branch-name]
 
 # 删除远程分支
 $ git push origin --delete [branch-name]
-$ git branch -dr [remote/branch]
 
 # 修改本地分支名称
 $ git branch -m [old-branch-name] [new-branch-name]
+
+# 查看当前分支的合并情况（非常有用）
+$ git log --graph --pretty=oneline --abbrev-commit
 ```
 
 4. 标签
@@ -147,15 +135,6 @@ $ git log
 # 显示commit历史，以及每次commit发生变更的文件
 $ git log --stat
 
-# 搜索提交历史，根据关键词
-$ git log -S [keyword]
-
-# 显示某个commit之后的所有变动，每个commit占据一行
-$ git log [tag] HEAD --pretty=format:%s
-
-# 显示某个commit之后的所有变动，其"提交说明"必须符合搜索条件
-$ git log [tag] HEAD --grep feature
-
 # 显示某个文件的版本历史，包括文件改名
 $ git log --follow [file]
 $ git whatchanged [file]
@@ -184,17 +163,8 @@ $ git diff HEAD
 # 显示两次提交之间的差异
 $ git diff [first-branch]...[second-branch]
 
-# 显示今天你写了多少行代码
-$ git diff --shortstat "@{0 day ago}"
-
 # 显示某次提交的元数据和内容变化
 $ git show [commit]
-
-# 显示某次提交发生变化的文件
-$ git show --name-only [commit]
-
-# 显示某次提交时，某个文件的内容
-$ git show [commit]:[filename]
 
 # 显示当前分支的最近几次提交
 $ git reflog
@@ -202,7 +172,7 @@ $ git reflog
 
 6. 远程同步
 
-``` git {14,17}
+``` git
 # 下载远程仓库的所有变动
 $ git fetch [remote]
 
@@ -221,16 +191,13 @@ $ git pull [remote] [branch]
 # 上传本地指定分支到远程仓库
 $ git push [remote] [branch]
 
-# 强行推送当前分支到远程仓库，即使有冲突
-$ git push [remote] --force
-
 # 推送所有分支到远程仓库
 $ git push [remote] --all
 ```
 
 7. 撤销
 
-``` git {8,14}
+``` git
 # 恢复暂存区的指定文件到工作区
 $ git checkout [file]
 
@@ -245,6 +212,9 @@ $ git reset [file]
 
 # 重置暂存区与工作区，与上一次commit保持一致
 $ git reset --hard
+
+# 查看执行过得命令（可查看撤销的commitId）
+$ git reflog
 
 # 重置当前分支的指针为指定commit，同时重置暂存区，但工作区不变
 $ git reset [commit]
