@@ -61,8 +61,14 @@
   100% { background-position: -100% 0;}
 }
 
-// 限制主页图片大小
 .theme-container
+  // 限制主页图片大小
   .home .hero img
     max-height 210px
-
+  // 修改“读javascript高级程序设计”侧边栏字体样式
+  .sidebar > .sidebar-links > li > a.sidebar-link
+    font-weight normal
+    font-size 1em
+    line-height 1
+    &.active
+      font-weight bold
