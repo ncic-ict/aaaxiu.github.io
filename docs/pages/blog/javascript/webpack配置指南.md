@@ -496,6 +496,99 @@ module.exports = function(content, sourceMap) {
 
 ## 样式处理
 
+前面介绍的方法通过style标签引入样式明显是不符合生产环境的，我们需要把css通过link标签引入，这样才能更好的利用客户端缓存。
+
+mini-css-extract-plugin插件：这是webpack4官方推荐的插件，它相比extract-text-webpack-plugin（webpack4以前版本适用）最重要的就是支持按需加载css。
+
+```js
+// webpack.config.js
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+
+module.exports = {
+  entry: './app.js',
+  output: {
+    filename: '[name].js'
+  },
+  mode: 'development',
+  module: {
+    rules: [{
+      test: /\.css$/,
+      use: [
+        {
+          loader: MiniCssExtractPlugin.loader,
+          options: {
+            publicPath: '../'
+          }
+        },
+        'css-loader'
+      ]
+    }]
+  },
+  plugins: [
+    new MiniCssExtractPlugin({
+      filename: '[name].css',
+      chunkFilename: '[id].css'
+    })
+  ]
+}
+```
+
+Sass：下载安装`yarn add sass-loader node-sass --dev`。
+
+```js
+module: {
+  rules: [
+    {
+      test: /\.scss$/,
+      use: ['style-loader', 'css-loader', 'sass-loader']
+    }
+  ]
+}
+```
+
+less与sass类似，它要安装`yarn add less less-loader --dev`
+
+PostCSS：PostCSS并不能算一个CSS的预编译器，它只是一个编译插件的容器。下载安装`yarn add postcss-loader --dev`。PostCSS最广泛的用途是与Autoprefixer给css添加浏览器前缀，如transform等新特性。他需要一个单独的配置文件postcss.config.js。
+
+```js
+module: {
+  rules: [
+    {
+      test: /\.css$/,
+      use: [
+        'style-loader',
+        'css-loader',
+        'postcss-loader'
+      ]
+    }
+  ]
+}
+```
+
+```js
+// postcss.config.js
+const autoprefixer = require('autoprefixer')
+module.exports = {
+  plugins: [
+    autoprefixer({
+      grid: true, // 支持使用网格布局
+      browsers: [
+        '>1%',
+        'last 3 versions',
+        'android 4.2',
+        'ie 8'
+      ]
+    })
+  ]
+}
+```
+
+## 代码分片
+
+optimization.SplitChunks：optimization.SplitChunks是webpack4为了改进CommonsChunk-Plugin而重新设计和实现的代码分片特性。
+
+
+
 
 
 *持续更新中。。。*
