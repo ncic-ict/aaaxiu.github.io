@@ -65,7 +65,7 @@ $ git branch -a
 $ git branch [branch-name]
 
 # 新建一个分支，并切换到该分支，git2.23以后也可以使用`git switch -c [branch]`
-$ git checkout -b [branch]
+$ git checkout -b [branch] [origin/branch]
 
 # 新建一个分支，与指定的远程分支建立追踪关系
 $ git branch --track [branch] [remote-branch]
@@ -88,7 +88,7 @@ $ git push origin --delete [branch-name]
 # 修改本地分支名称
 $ git branch -m [old-branch-name] [new-branch-name]
 
-# 查看当前分支的合并情况（非常有用）
+# 查看当前分支的合并情况
 $ git log --graph --pretty=oneline --abbrev-commit
 ```
 
@@ -197,7 +197,7 @@ $ git push [remote] --all
 
 7. 撤销
 
-``` git
+``` git {14}
 # 恢复暂存区的指定文件到工作区
 $ git checkout [file]
 
@@ -211,7 +211,7 @@ $ git checkout .
 $ git reset [file]
 
 # 重置暂存区与工作区，与上一次commit保持一致
-$ git reset --hard
+$ git reset --hard [commitID]
 
 # 查看执行过得命令（可查看撤销的commitId）
 $ git reflog
