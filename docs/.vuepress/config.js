@@ -28,7 +28,7 @@ module.exports = {
       { text: 'Home', link: '/'},
       { text: '博文', link: '/pages/blog/javascript/webpack配置指南.md' }, // 内部链接 以docs为根目录
       { text: '代码块', link: '/pages/code/一行代码实现时间戳转时分秒.md'},
-      { text: '读JavaScript高级程序设计', link: '/pages/javascript_programme/javascript简介.md' },
+      // { text: '读JavaScript高级程序设计', link: '/pages/javascript_programme/javascript简介.md' },
       { text: 'GitHub', link: 'https://github.com/aaaxiu'}  
     ],
     //侧边导航栏：会根据当前的文件路径是否匹配侧边栏数据，自动显示/隐藏
@@ -95,10 +95,10 @@ module.exports = {
           ]
         }
       ],
-      '/pages/javascript_programme/': [
-        ['javascript简介.md', 'javascript简介'],
-        ['在HTML中使用javascript.md', '在HTML中使用javascript']
-      ]
+      // '/pages/javascript_programme/': [
+      //   ['javascript简介.md', 'javascript简介'],
+      //   ['在HTML中使用javascript.md', '在HTML中使用javascript']
+      // ]
       //...可添加多个不同的侧边栏，不同页面会根据路径显示不同的侧边栏
     }
   }
