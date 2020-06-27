@@ -91,34 +91,25 @@
 ```json
 {
     "editor.tabSize": 2,
-    // 控制折行的方式。on: 将在视区宽度处换行
     "editor.wordWrap": "on",
-    "editor.lineHeight": 25,
-    "editor.fontFamily": "operator Mono Light, Lucida Console, Monaco",
-    "terminal.integrated.fontFamily": "Courier New",
+    "editor.lineHeight": 26,
+    "editor.fontFamily": "Monaco, 苹方-简",
     "editor.letterSpacing": 0.5,
     "editor.fontSize": 16,
-    // 渲染每行的实际字符，而不是色块
     "editor.minimap.renderCharacters": false,
-    "editor.fontLigatures": true,
-    // 自动保存
     "files.autoSave": "onFocusChange",
-    // 启用后，保存文件时在文件末尾插入一个最终新行
     "files.insertFinalNewline": true,
-    // 配置默认使用的设置编辑器
     "workbench.settings.editor": "json",
-    // 图标
     "workbench.iconTheme": "vscode-icons",
-    // 默认使用的终端
-    "terminal.integrated.shell.windows": "C:\\Program Files\\Git\\bin\\bash.exe",
+    "terminal.integrated.shell.windows": "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
     "workbench.colorTheme": "Panda Syntax",
-    "editor.codeActionsOnSave": {
-        "source.fixAll.eslint": true
-    },
     "gitlens.views.repositories.files.layout": "tree"
 }
 ```
 
 ### 主题
 
-上面的配置文件里有--- [Panda Syntax](https://marketplace.visualstudio.com/items?itemName=tinkertrain.theme-panda)
+上面的配置文件里有--- [Panda Syntax](https://marketplace.visualstudio.com/items?itemName=tinkertrain.theme-panda)，如图：
+
+![](../images/vscode-theme.png)
+

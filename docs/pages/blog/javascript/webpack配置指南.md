@@ -585,7 +585,602 @@ module.exports = {
 
 ## 代码分片
 
-optimization.SplitChunks：optimization.SplitChunks是webpack4为了改进CommonsChunk-Plugin而重新设计和实现的代码分片特性。
+代码分片（code-splitting）是Webpack作为打包工具所特有的一项技术，通过这项技术我们可以把代码按照特定的形式进行拆分，使用户不必一次全部加载，而是按需加载。
+
+**通过入口划分代码**
+
+```js
+// webpack.config.js
+entry: {
+  app: './app.js',
+  lib: ['lib-a', 'lib-b', 'lib-c']
+}
+
+// index.html
+<script src="dist/lib.js"></script>
+<script src="dist/app.js"></script>
+```
+
+这种拆分方法主要适用于那些将接口绑定在全局对象上的库，因为业务代码中的模块无法直接引用库中的模块，二者属于不同的依赖树。
+
+**CommonsChunkPlugin**
+
+CommonsChunkPlugin是webpack4之前内部自带的插件，它可以将多个chunk中公共的部分提取处理啊。我们先从一个例子中对比使用CommonsChunkPlugin后的结果，下面是未使用CommonsChunkPlugin的配置：
+
+```js
+// webpack.config.js
+module.exports = {
+  entry: {
+    foo: './foo.js',
+    bar: './bar.js'
+  },
+  output: {
+    filename: '[name].js'
+  }
+}
+
+// foo.js
+import React from 'react'
+document.write('foo.js', React.version)
+
+// bar.js
+import React from 'react'
+document.write('bar.js', React.version)
+```
+
+这样的配置的打包结果是：分别打包了foo.js和bar.js，并且react分别被打包进对应的模块，也就是被重复打包了。
+
+更改webpack.config.js，添加CommonsChunkPlugin。
+
+```js
+// webpack.config.js
+const webpack = require('webpack')
+
+module.exports = {
+  entry: {
+    foo: './foo.js',
+    bar: './bar.js'
+  },
+  output: {
+    filename: '[name].js'
+  },
+  plugins: [
+    // 使用webpack内部的CommonsChunkPlugin函数创建一个插件实例
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'commons', // 指定公共chunk的名字
+      filename: 'commons.js' // 提取后的资源文件名
+    })
+  ]
+}
+```
+
+此次打包将多产出一个commons.js，而foo.js和bar.js的打包文件中将不包含react，而是把它提取到了commons.js。
+
+当然，我们也可以使用CommonsChunkPlugin提取单入口的应用，只需要单独为第三方类库创建一个入口即可：
+
+```js
+// webpack.config.js
+const webpack = require('webpack')
+module.exports = {
+  entry: {
+    app: './app.js',
+    vendor: ['react']
+  },
+  output: {
+    filename: '[name].js'
+  },
+  plugins: {
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendor',
+      filename: 'vendor.js'
+    })
+  }
+}
+
+// app.js
+import React from 'react'
+document.write('app.js', React.version)
+```
+
+设置提取范围和提取规则：
+
+```js
+plugins: [
+  new webpack.optimize.CommonsChunkPlugin({
+    name: 'commons',
+    filename: 'commons.js',
+    // 只从a.js和b.js中提取公共模块
+    chunks: ['a', 'b'], 
+    // 只有当某个模块被n个入口同时引用才会进行提取，不影响通过数组形式入口传入的模块的提取（就是说上面的react始终会被提取）
+    // 设置为Infinity表示出数组形式入口中的模块其他公共模块均不提取，
+    minChunk: 3, 
+  })
+]
+```
+
+**optimization.SplitChunks**
+
+optimization.SplitChunks是webpack4为了改进CommonsChunk-Plugin而重新设计和实现的代码分片特性。使用SplitChunks来提取react试试：
+
+```js
+// webpack.config.js
+module.exports = {
+  entry: './foo.js',
+  output: {
+    filename: 'foo.js',
+    publicPath: '/dist/'
+  },
+  mode: 'development',
+  optimization: {
+    splitChunks: {
+      chunks: 'all'
+    }
+  }
+}
+
+// foo.js
+import React from 'react'
+import('./bar.js')
+document.write('foo.js', React.version)
+
+// bar.js
+import React from 'react'
+console.log('bar.js', React.version)
+```
+
+SplitChunks的默认配置如下：
+
+```js
+splitChunks: {
+  // async 只提取异步chunk, initial 只对入口chunk生效， all 两种模式同时开启
+  chunks: 'async',
+  minSize: {
+    javascript: 30000,
+    style: 50000
+  },
+  maxSize: 0,
+  minChunks: 1,
+  maxAsyncRequests: 5,
+  maxInitialRequests: 3,
+  automaticNameDelimiter: '~',
+  name: true,
+  cacheGroups: {
+    // 提取node_modules中符合条件的模块
+    vendors: {
+      test: /[\\/]node_modules[\\/]/,
+      priority: -10,
+    },
+    // 被多次引用的模块
+    default: {
+      minChunks: 2,
+      priority: -20,
+      resueExistingChunk: true
+    }
+  }
+}
+```
+
+## 生产环境配置
+
+生产环境的配置与开发环境有所不同，比如要设置mode、环境变量，为文件名添加chunk hash作为版本号等。
+
+环境变量：通常我们需要为生产环境和本地环境添加不同的环境变量，在webpack中可以使用DefinePlugin进行设置。
+
+```js
+// webpack.config.js
+const webpack = require('webpack')
+module.exports = {
+  // ...
+  plugins: [
+    new webpack.DefinePlugin({
+      ENV: JSON.stringify('production')
+    })
+  ]
+}
+
+// app.js
+document.write(ENV)
+```
+
+许多框架和库都采用process.env.NODE_ENV作为一个区别开发环境和生产环境的变量。process.env是Node.js用于存放当前进程环境变量的对象，而NODE_ENV则可以让开发者指定当前的运行时环境。
+
+```js
+new webpack.DefinePlugin({
+  process.env.NODE_ENV: 'production'
+})
+```
+
+如果启动了mode: production，则webpack已经设置好了process.env.NODE_ENV，不需要再认为添加了。
+
+source map：source map指的是将编译、打包、压缩后的代码映射回源代码的过程。生成的map文件可能会很大，但是不用担心，只要不打开开发者工具，默认的map文件不会被加载。
+
+javascript的source map的配置很简单：
+
+```js
+module.exports = {
+  // ...
+  devtool: 'source-map'
+}
+```
+
+css、scss、less则需要额外的配置：
+
+```js
+const path = require('path')
+
+module.exports = {
+  // ...
+  devtool: 'source-map',
+  module: {
+    rules: [
+      {
+        test: /\.scss$/,
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              sourceMap: true
+            }
+          },
+          {
+            loader: 'sass-loader',
+            options: {
+              sourceMap: true
+            }
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+
+资源压缩：压缩javascript大多数时候使用的工具有两个，一个是UglifyJS（webpack3已集成），另一个是terser（webpack4已集成）。后者由于支持ES6+代码的压缩，更加面向于未来，因此官方在webpack4中默认使用了terser的插件terser-webpack-plugin。
+
+在webpack3中开启压缩：
+
+```js
+const webpack = require('wepback')
+module.exports = {
+  entry: './app.js',
+  output: {
+    filename: 'bundle.js'
+  },
+  plugins: [
+    new webpack.optimize.UglifyJsPlugin()
+  ]
+}
+```
+
+在webpack4中，这项配置被移到了config.optimization.minimize。
+
+```js
+module.exports = {
+  // ...
+  optimization: {
+    minimize: true // 开启mode: production的默认配置，不需要设置
+  }
+}
+```
+
+压缩css：压缩css文件的前提是使用extract-text-webpack-plugin或mini-css-extract-plugin将样式提取出来，接着使用optimize-css-assets-webpack-plugin来进行压缩，这个插件本质上使用的是压缩器cssnano。
+
+```js
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
+cosnt OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+
+module.exports = {
+  // ...
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: 'css-loader'
+        })
+      }
+    ]
+  },
+  plugins: [
+    new ExtractTextPlugin('style.css')
+  ],
+  optimization: {
+    minimizer: [
+      new OptimizeCSSAssetsPlugin({
+        // 生效范围：只压缩匹配到的资源
+        assetNameRegExp: /\.optimize\.css$/g,
+        // 压缩处理器，默认为cssnano
+        cssProcessor: require('cssnano'),
+        // 压缩处理器配置的配置
+        cssProcessorOptions: {
+          discardComments: {
+            removeAll: true
+          }
+        },
+        // 是否展示log
+        canPrint: true
+      })
+    ]
+  }
+}
+```
+
+**缓存**
+
+资源hash：我们通常使用chunkhash来作为文件版本号：
+
+```js
+module.exports = {
+  entry: './app.js',
+  output: {
+    filename: 'bundle@[chunkhash].js'
+  },
+  mode: 'production'
+}
+```
+
+输出动态HTML：每次手动引入JS很麻烦，我们可以借助html-webpack-plugin来实现资源名的同步。
+
+```js
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+
+module.exports = {
+  // ...
+  plugins: [
+    // html-webpack-plugin支持个性化配置（https://github.com/jantimon/html-webpack-plugin）
+    new HtmlWebpackPlugin()
+  ]
+}
+```
+
+bundle体积监控和分析：webpack有一个很有用的工具---webpack-bundle-analyzer，它能够帮助我们分析一个bundle的构成。使用方法很简单：
+
+```js
+const Analyzer = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+
+module.exports = {
+  // ...
+  plugin: [
+    new Analyzer()
+  ]
+}
+```
+
+它可以帮我们生成一张bundle的模块组成结构图，每个模块所占的体积一目了然。
+
+最后我们还需要自动化的对资源体积进行监控，bundlesize可以帮助做到这一点。安装之后只需要在package.json进行配置即可：
+
+```json
+{
+  "name": "my-app",
+  "version": "1.0.0",
+  "bundlesize": [
+    {
+      "path": "./bundle.js",
+      "maxSize": "50kb"
+    }
+  ],
+  "scripts": {
+    "test:size": "bundlesize"
+  }
+}
+```
+
+## 打包优化
+
+**HappyPack**
+
+我们先来看一下代码转译的工作流程：
+
+- 从配置中获取打包入口；
+- 匹配loader规则，并对入口模块进行转译；
+- 对转译后的模块进行依赖查找；
+- 对新找到的模块重复惊醒步骤2、3，直到没有新的依赖模块。
+
+可以看出，上面的流程是一个递归则过程，而webpack是单线程的，它只能逐个的对模块进行转译。HappyPack解决的就是这个痛点，它的核心特性是可以开启多个线程，并行地对不同模块进行转译。
+
+单个loader的优化：一般地，HappyPack适用于那些转译任务比较重的工程，如babel-loader和ts-loader，而对于其他的如sass-loader、less-loader的优化效果不大明显。
+```js
+// 初始webpack配置
+module.exports = {
+  // ...
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader',
+        options: {
+          presets: ['react']
+        }
+      }
+    ]
+  }
+}
+
+// 使用HappyPack的配置
+const HappyPack = require('happyPack')
+
+module.exports = {
+  // ...
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        // 原有配置上添加happypack
+        loader: 'happypack/loader'
+      }
+    ]
+  },
+  plugins: [
+    new HappyPack({
+      // 将原有配置迁移到HappyPack参数中
+      loaders: [
+        {
+          loader: 'babel-loader',
+          options: {
+            presets: ['react']
+          }
+        }
+      ]
+    })
+  ]
+}
+```
+
+多个loader的优化：多个loader需要为每一个loader配置一个id：
+
+```js
+const HappyPack = require('happypack')
+
+module.exports = {
+  // ...
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: 'happypack/loader?id=js'
+      },
+      {
+        test: /\.ts$/,
+        exclude: /node_modules/,
+        loader: 'happypack/loader?id=ts'
+      }
+    ]
+  },
+  plugins: [
+    new HappyPack({
+      id: 'js',
+      loaders: [
+        {
+          loader: 'babel-loader',
+          options: {}
+        }
+      ]
+    }),
+    new HappyPack({
+      id: 'ts',
+      loader: [
+        {
+          loader: 'ts-loader',
+          options: {}
+        }
+      ]
+    })
+  ]
+}
+```
+
+**缩小打包范围**
+
+合理使用exclude和include。
+
+noParse：有些库我们希望webpack完全不要去进行解析，即不希望应用任何loader规则，库的内部也不会有对其他模块的依赖。下面的例子将会忽略所有文件名中包含lodash的模块，这些模块仍然会被打包进资源文件，只不过webpack不会对其进行任何解析。
+
+```js
+module.exports = {
+  // ...
+  module: {
+    noParse: /lodash/
+  }
+}
+```
+
+cache：有些loader会有一个cache配置项，用来在编译代码后同时保存一份缓存，下次编译时则只编译变化了的文件。
+
+tree shaking：webpack提供了tree shaking功能，帮助我们检测工程中没有被引用过得模块，这部分代码将永远无法被执行到，因此也被称为“死代码”。
+
+```js
+// index.js
+import {foo} from './util'
+foo()
+
+// util.js
+export function foo() {
+  console.log('foo')
+}
+// 没有被任何其他模块引用，属于“死代码”
+export function bar() {
+  console.log('bar')
+}
+```
+
+在webpack打包时会对bar()添加一个标记，在正常开发模式下它仍然存在，只是在生产环境的压缩那一步会被一出掉。
+
+tree shaking可以是bundle体积显著减少，但实现tree shaking需要一些前提条件：tree shaking只能对ES6 Module生效。而为了更好的兼容性，目前的npm包大部分还在使用CommonJS的形式。
+
+如果我们在工程中使用了babel-loader，那么一定要通过配置来禁用它的模块依赖解析。因为如果由babel-loader来做依赖解析，webpack接收到的就都是转化过的CommonJS形式的模块，无法进行tree-shaking。禁用babel-loader模块依赖解析的配置示例如下：
+```js
+module.exports = {
+  // ...
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: [
+          {
+            loader: 'babel-loader',
+            options: {
+              presets: [
+                // 这里一定要加上modules: false
+                [
+                  @babel/preset-env, 
+                  {
+                    modules: false
+                  }
+                ]
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+
+## 开发环境调优
+
+**webpack-dashboard**
+
+webpack-dashboard以表格的形式展示构建后的包的信息。
+
+![](http://i.imgur.com/qL6dXJd.png)
+
+配置：
+
+```js
+const DashboardPlugin = require('webpack-dashboard/plugin')
+
+module.exports = {
+  entry: './app.js',
+  output: {
+    filename: '[name].js'
+  },
+  mode: 'development',
+  plugins: [
+    new DashboardPlugin()
+  ]
+}
+```
+
+要使webpack-dashboard生效还要改一下webpack的启动方式：
+
+```json
+{
+  "script": {
+    // "dev": "webpack-dev-server"
+    "dev": "webpack-dashboard -- webpack-dev-server"
+  }
+}
+```
+
+**webpack-merge**
 
 
 
