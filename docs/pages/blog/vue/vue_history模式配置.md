@@ -1,4 +1,4 @@
-# vue_history模式配置
+# Vue_history模式配置
 <br >
 
 

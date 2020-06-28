@@ -1,4 +1,4 @@
-# webpack配置指南
+# Webpack配置指南
 <br />
 
 ::: tip
@@ -1182,8 +1182,105 @@ module.exports = {
 
 **webpack-merge**
 
+对于需要多种打包环境的项目来说，webpack-merge是一个非常实用的工具。假设我们的项目有3种不同的配置，通过webpack.common.js提取公共部分：
+
+```js
+// webpack.common.js
+module.exports = {
+  entry: './app.js',
+  output: {
+    filename: '[name].js',
+  },
+  module: {
+    rules: [
+      {
+        test: /\.(png|jpg|gif)$/,
+        use: 'file-loader'
+      },
+      {
+        test: /\.css$/,
+        use: [
+          'style-loader',
+          'css-loader'
+        ]
+      }
+    ]
+  }
+}
+```
+
+针对生产环境配置webpack.prod.js，假设不借助任何工具：
+
+```js
+// webpack.prod.js
+const commonConfig = require('./webpack.common.js')
+
+module.exports = Object.assign(commonConfig, {
+  mode: 'production'
+})
+```
+
+这样看起来似乎也没什么毛病，但是假如我们需要修改webpack.common.js中的某一个loader的话，不许替换到真个module的配置，因为用过Object.assign没办法准确找到CSS的规则进行替换。下面看看使用webpack-merge来解决这个问题：
+
+```js
+// webpack.prod.js
+const merge = require('webpack-merge')
+const commonConfig = require('./webpack.common.js')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
+
+module.exports = merge.smart(commonConfig, {
+  mode: 'production',
+  module: {
+    rules: [
+      // 不借助工具需要复制webpack.common.js中其他所有rules
+      {
+        test: /\.css$/,
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: 'css-loader'
+        })
+      }
+    ]
+  }
+})
+```
+
+我们用merge.smart替换了Object.assign。webpack-merge在合并module.rules的过程中会以test属性作为标识符，当发现有相同项出现的时候以后面的规则覆盖前面的规则。
+
+**speed-measure-webpack-plugin**
+
+![](https://raw.githubusercontent.com/stephencookdev/speed-measure-webpack-plugin/HEAD/preview.png)
+
+speed-measure-webpack-plugin简称为SMP。SMP可以分析出webpack整个打包过程中在各个loader和plugin上耗费的时间。使用非常简单：
+
+```js
+// webpack.config.js
+const SpeedMeasurePlugin = require('speed-measure-webpack-plugin')
+const smp = new SpeedMeasurePlugin()
+
+module.exports = smp.wrap({
+  entry: './app.js',
+  // ...
+})
+```
+
+**HMR**
+
+HMR即Hot Module Replacement（模块热替换），webpack支持在不刷新页面的情况下更新模块，但HMR需要手动开启。而且项目必须是基于webpack-dev-server或者webpack-dev-middle开发的，webpack本身的命令行并不支持HMR。
+
+```js
+const webpack = require('webpack')
+
+module.exports = {
+  // ...
+  plugins: [
+    new webpack.HotModuleReplacementPlugin()
+  ],
+  devServer: {
+    hot: true
+  }
+}
+```
 
 
-
-
-*持续更新中。。。*
+完！！！

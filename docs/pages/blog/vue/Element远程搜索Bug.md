@@ -1,4 +1,4 @@
-# 解决element-ui2.10.x版本以上使用远程搜索的Bug
+# Element远程搜索Bug
 <br >
 
 > 公司开发一个项目用到了element-ui中的`Select`组件的远程搜索功能，出现了一个在反复搜索时会重置以前选中的项是它的label变成value的情况，这是一个不得不解决的bug，分享出我的解决办法供参考。
