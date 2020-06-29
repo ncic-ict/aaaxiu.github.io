@@ -1,10 +1,3 @@
-<!--
- * @Description: Content-type的几种常见类型
- * @Author: 林河
- * @Date: 2020-05-27 17:03:12
- * @LastEditTime: 2020-05-27 17:10:15
- * @LastEditors: 林河
---> 
 # Content-type的几种常见类型
 <br />
 

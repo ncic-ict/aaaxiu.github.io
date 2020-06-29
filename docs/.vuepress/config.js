@@ -1,10 +1,3 @@
-/*
- * @Description: 
- * @Author: 林河
- * @Date: 2020-05-23 16:21:12
- * @LastEditTime: 2020-06-01 16:59:11
- * @LastEditors: 林河
- */ 
 module.exports = {
   title: '林河前端之路',
   description: '前端笔记整理',
