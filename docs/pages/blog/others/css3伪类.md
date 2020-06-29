@@ -1,4 +1,11 @@
-# CSS3伪类
+<!--
+ * @Description: css伪类
+ * @Author: 林河
+ * @Date: 2020-05-25 19:16:41
+ * @LastEditTime: 2020-05-27 11:10:17
+ * @LastEditors: 林河
+--> 
+# css3伪类
 <br />
 
 > css3 中添加了很多了伪类选择器，这里要讲的主要是 `:nth-of-type()` 和 `:nth-child()` 。因为经常会出现两个选择器的功能不清楚，或者设置样式无效的问题。
