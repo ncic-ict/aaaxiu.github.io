@@ -93,3 +93,5 @@ fatal: Could not read from remote repository.
 
 方法: 输入`git remote set-url origin git@gitee.com:xxxxxx/xxxxxx.git`, 你的新仓库地址
 
+3. git默认忽略文件名大小写因此无法监听到改变，需要运行`git config core.ignorecase false`禁止忽略大小写就可以监听到文件名改变了。
+

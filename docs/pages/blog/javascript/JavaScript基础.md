@@ -78,10 +78,186 @@ function createFunctions() {
 
 [原型和原型链](./原型和原型链.md)
 
+## This
 
+> 关于this是一个老生常谈的话题了，记住一点：**this永远指向最后调用它的那个对象。**
 
+先来一个简单的例子：
 
+```js
+var name = 'windowName'
+function fn() {
+  var name = 'linhe'
+  console.log(this.name)
+}
+fn() // windowName
+```
 
+用**this永远指向最后调用它的那个对象**来解释一下，前面没有调用对象那么就是全局对象window，因此在全局找name然后就找到了windowName。
+
+再换一个例子看看：
+
+```js
+var name = 'windowName'
+var obj = {
+  name: 'linhe',
+  fn: function() {
+    console.log(this.name)
+  }
+}
+console.log(obj.fn()) // linhe
+```
+
+还是用这句话就很好理解了，调用fn的对象是obj，所以this.name就是linhe。
+
+改动一下看看：
+
+```js
+var name = 'windowName'
+var obj = {
+  fn: function() {
+    console.log(this.name)
+  }
+}
+var fn = obj.fn
+fn() // windowName
+```
+
+看到这里可能会有点疑惑，fn不是指向obj.fn吗？再仔细看看**this永远指向最后调用它的那个对象**，在将obj.fn重新赋值的时候其实并没有调用对象的这个方法，真正调用是在最后一行代码，还是全局调用，所以是windowName。
+
+到这里，不管什么样的句式应该都不成问题了。
+
+```js
+var name = 'windowName'
+function fn() {
+  var name = 'linhe'
+  innerFunc()
+  function innerFunc() {
+    console.log(this.name) // windowName
+  }
+}
+```
+
+看看吧，就算在函数体内调用，没有对象调用函数那就是全局调用。
+
+**改变this指向的方法：**
+
+- 使用ES6箭头函数；
+- 在函数内部保存this(_this = this);
+- 使用call、apply、bind；
+- new实例化一个对象。
+
+```js
+var name = 'windowName'
+var obj = {
+  name: 'linhe',
+  func1: function() {
+    console.log(this.name)
+  },
+  func2: function() {
+    setTimeout(function() {
+      this.func1()
+    }, 1000)
+  }
+}
+obj.func2() // this.func1 is not a function
+```
+
+setTimeout是全局方法，它内部的回调函数指向全局，而全局没有func1方法，因此就报错了。
+
+按照上面说的几点，改变this的指向试试：
+
+箭头函数：箭头函数的this始终指向函数定义时的this，而非执行时。
+
+```js
+var name = 'windowName'
+var obj = {
+  name: 'linhe',
+  func1: function() {
+    console.log(this.name)
+  },
+  func2: function() {
+    setTimeout(() => {
+      this.func1()
+    }, 1000)
+  }
+}
+obj.func2() // linhe
+```
+
+在函数内部使用变量存储this的指向
+
+```js
+var name = 'windowName'
+var obj = {
+  name: 'linhe',
+  func1: function() {
+    console.log(this.name)
+  },
+  func2: function() {
+    var _this = this
+    setTimeout(function() {
+      _this.func1()
+    }, 1000)
+  }
+}
+obj.func2() // linhe
+```
+
+使用call、apply、bind
+
+```js
+// call
+var name = 'windowName'
+var obj = {
+  name: 'linhe',
+  func1: function() {
+    console.log(this.name)
+  },
+  func2: function() {
+    setTimeout(function() {
+      this.func1()
+    }.call(obj), 1000)
+  }
+}
+obj.func2() // linhe
+
+// apply
+var name = 'windowName'
+var obj = {
+  name: 'linhe',
+  func1: function() {
+    console.log(this.name)
+  },
+  func2: function() {
+    setTimeout(function() {
+      this.func1()
+    }.apply(obj), 1000)
+  }
+}
+obj.func2() // linhe
+
+// bind
+var name = 'windowName'
+var obj = {
+  name: 'linhe',
+  func1: function() {
+    console.log(this.name)
+  },
+  func2: function() {
+    setTimeout(function() {
+      this.func1()
+    }.bind(obj), 1000)
+  }
+}
+obj.func2() // linhe
+```
+
+说一下上述三个方法的第一个参数，它是一个对象。call、apply、bind都是函数的方法，调用方法改变函数体内this的指向，改为指向第一个参数（对象）,在非严格模式下，第一个参数为null或undefined时，函数体内的this则指向全局对象。
+
+这里有一点需要注意：上面的call、apply的返回值是func1方法的返回值，也就是undefined，这样的代码在真正的业务中并不适用，因为这会导致setTimeout立即执行。而bind返回的是setTimeout回调函数的拷贝，在业务中逻辑合理，会延迟一秒执行func1，打印出linhe。
+
+## 手写call、apply、bind
 
 
 
