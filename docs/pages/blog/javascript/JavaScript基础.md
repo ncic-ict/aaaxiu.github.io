@@ -78,7 +78,7 @@ function createFunctions() {
 
 [原型和原型链](./原型和原型链.md)
 
-## This
+## this
 
 > 关于this是一个老生常谈的话题了，记住一点：**this永远指向最后调用它的那个对象。**
 
@@ -140,7 +140,7 @@ function fn() {
 
 看看吧，就算在函数体内调用，没有对象调用函数那就是全局调用。
 
-**改变this指向的方法：**
+#### 改变this指向的方法：
 
 - 使用ES6箭头函数；
 - 在函数内部保存this(_this = this);
@@ -258,6 +258,82 @@ obj.func2() // linhe
 这里有一点需要注意：上面的call、apply的返回值是func1方法的返回值，也就是undefined，这样的代码在真正的业务中并不适用，因为这会导致setTimeout立即执行。而bind返回的是setTimeout回调函数的拷贝，在业务中逻辑合理，会延迟一秒执行func1，打印出linhe。
 
 ## 手写call、apply、bind
+
+:top: 上面说到关于this指向问题时已经谈到过这三个方法可以改变函数的this指向，那么先来看看call、apply、bind各自定义和区别先：
+
+#### call
+
+call()方法使用指定的this值和单独给出的一个或多个参数来调用一个函数。
+
+语法：
+
+> *function*.call(thisArg, arg1, arg2, ...)
+
+参数thisArg是可选的，它指的是function函数运行时使用的this值。在非严格模式下，当thisArg为null或undefined时，this指向全局对象，在浏览器中就是window。
+
+参数arg1, arg2, ...是要传入function的参数列表。
+
+#### apply
+
+apply和call方法类似，只有一个区别，就是call()方法接受的是一个参数列表，而apply()方法接受的是一个包含多个参数的数组。
+
+语法：
+
+> *function*.apply(thisArg, [arg1, arg2, ...])
+
+#### bind
+
+bind()方法创建一个新函数，在bind()被调用时，这个新函数的this被指定为bind()的第一个参数，而其余参数将作为新函数的参数，供调用时使用。bind()返回原函数的拷贝，并拥有指定的this值和初始参数。
+
+语法：
+
+> *function*.bind(thisArg[, arg1 [, arg2[, ...]]])
+
+了解了概念之后，我们再来看看手写call、apply、bind的实现方式。
+
+#### 手写call
+
+先来一个原生call的使用方式：
+
+```js
+let Person = {
+  name: 'linhe',
+  say: function() {
+    console.log(this.name)
+  }
+}
+
+Person.say() // linhe
+let p1 = {
+  name: 'Tom'
+} 
+// 原生call
+Person.say.call(p1) // Tom
+```
+
+通过上面的示例我们发现：如果p1有say()方法，执行p1.say()可以得到和Person.say.call(p1)同样的结果。没错这就是call的实现原理。
+
+```js
+Function.prototype.myCall = function(context) {
+  // context就是上例的p1对象
+  // this结合上例就是Person.say()方法
+  context.say = this
+  // 立即执行
+  context.say()
+}
+
+Person.say.myCall(p1) // Tom
+```
+
+就是这么简单，不过还有几点需要完善：
+
+- 支持多个参数；
+- 给上下文定义的函数要保持唯一；
+- 调用完函数后要进行删除。
+
+
+
+
 
 
 

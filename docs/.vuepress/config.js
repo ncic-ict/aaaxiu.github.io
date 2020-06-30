@@ -14,8 +14,8 @@ module.exports = {
   themeConfig: {
     activeHeaderLinks: false, // 默认值：true
     smoothScroll: true, // 启动页面滚动
-    activeHeaderLinks: false, // 不改变页面hash值（优化项）
-    sidebarDepth: 2, //  设置侧边导航自动提取markdown文件标题的层级，默认1为h2层级
+    // activeHeaderLinks: false, // 不改变页面hash值（优化项）
+    // sidebarDepth: 2, //  设置侧边导航自动提取markdown文件标题的层级，默认1为h2层级
     logo: '/linhe.jpg',
     nav:[
       { text: 'Home', link: '/'},

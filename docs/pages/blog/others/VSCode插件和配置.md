@@ -23,6 +23,10 @@
 + **Chinese (Simplified) Language Pack for Visual Studio Code** 
 
     适用于 VS Code 的中文（简体）语言包
+
++ **Code Runner**
+
+    运行代码片段（需要指定运行语言使用`Ctrl + Alt + J`）
     
 + **Debugger for Chrome** 
 
@@ -103,7 +107,8 @@
     "workbench.iconTheme": "vscode-icons",
     "terminal.integrated.shell.windows": "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
     "workbench.colorTheme": "Panda Syntax",
-    "gitlens.views.repositories.files.layout": "tree"
+    "gitlens.views.repositories.files.layout": "tree",
+    "code-runner.runInTerminal": true
 }
 ```
 
