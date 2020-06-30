@@ -331,11 +331,82 @@ Person.say.myCall(p1) // Tom
 - 给上下文定义的函数要保持唯一；
 - 调用完函数后要进行删除。
 
+```js
+// 创建一个唯一的方法名，防止被调用的对象本来有同名方法而被覆盖
+function mySymbol(obj) {
+  let unique = (Math.random() + new Date().getTime()).toString(32).slice(0, 8)
+  if (obj.hasOwnProperty(unique)) {
+    return mySymbol(obj)
+  } else {
+    return unique
+  }
+}
 
+Function.prototype.myCall = function() {
+  // 没有参数或者为null指向window
+  let context = arguments[0] == null ? window : arguments[0]
+  // 生成唯一方法名
+  let fn = mySymbol(context)
+  // 把要借用的方法拷贝到对象方法上
+  context[fn] = this
+  // 截取参数
+  let arg = [...arguments].slice(1)
+  // 立即调用
+  const result = context[fn](...arg)
+  // 删除
+  delete context[fn]
+  // 返回结果
+  return result
+}
 
+// 测试
+let person = {
+  name: 'linhe',
+  say(age) {
+    console.log(`我的名字：${this.name}，我的年龄：${age}岁`)
+  }
+}
 
+let p1 = {
+  name: 'Tom'
+}
+person.say.myCall(p1, 18)
+person.say.myCall(null, 18)
+```
 
+#### 手写apply
 
+```js
+Function.prototype.myApply = function() {
+  let context = arguments[0] == null ? window : arguments[0]
+  let fn = mySymbol(context)
+  context[fn] = this
+  // apply第二个参数是数组
+  let args = arguments[1] || []
+  const result = context[fn](...args)
+  delete context[fn]
+  return result
+}
+```
+
+#### 手写bind
+
+```js
+Function.prototype.myBind = function() {
+  let context = arguments[0] == null ? window : arguments[0]
+  //返回一个绑定this的函数，我们需要在此保存this
+  let self = this
+  // 可以支持柯里化传参（fn.bind(a)(b)），保存参数
+  let args = [...arguments].slice(1)
+  // 返回函数
+  return function() {
+    let newArgs = [...arguments]
+    return self.apply(context, args.concat(newArgs))
+  }
+}
+```
+
+## 宏任务和微任务
 
 更新中。。。
 
