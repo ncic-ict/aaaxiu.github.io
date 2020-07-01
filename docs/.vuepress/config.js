@@ -41,6 +41,14 @@ module.exports = {
           ]
         },
         {
+          title: 'CSS',
+          collapsable: false,
+          children: [
+            ['css/CSS基础.md', 'CSS基础'],
+            ['css/CSS3伪类.md', 'CSS3伪类'],
+          ]
+        },
+        {
           title: 'Vue',   // 一级菜单名称
           collapsable: false, // false为默认展开菜单, 默认值true是折叠,
           children: [
@@ -69,7 +77,6 @@ module.exports = {
             ['others/彻底理解浏览器的缓存机制.md', '彻底理解浏览器的缓存机制'],
             ['others/在第三方页面调用微信接口.md', '在第三方页面调用微信接口'],
             ['others/移动端遮罩阻止滚动方案.md', '移动端遮罩阻止滚动方案'],
-            ['others/CSS3伪类.md', 'CSS3伪类'],
             ['others/Content-type的几种常见类型.md', 'Content-type的几种常见类型'],
           ]
         }

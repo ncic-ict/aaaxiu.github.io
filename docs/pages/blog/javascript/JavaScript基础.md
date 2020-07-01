@@ -408,5 +408,14 @@ Function.prototype.myBind = function() {
 
 ## 宏任务和微任务
 
+
+
+
+
+
+
+
+
+
 更新中。。。
 
