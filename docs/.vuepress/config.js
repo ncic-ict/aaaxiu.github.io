@@ -6,10 +6,14 @@ module.exports = {
   head: [
     ['link', { rel: 'icon', href: '/linhe.jpg' }],
   ],
-  base: '/', // 这是部署到github相关的配置 下面会讲
+  base: '/', // 这是部署到github相关的配置
   port: 4396,
   extraWatchFiles: [
     '.vuepress/config.js', // 使用相对路径
+  ],
+  plugins: [
+    '@vuepress/back-to-top',
+    '@vuepress/medium-zoom'
   ],
   themeConfig: {
     activeHeaderLinks: false, // 默认值：true

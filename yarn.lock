@@ -2,3 +2,26 @@
 # yarn lockfile v1
 
 
+"@vuepress/plugin-back-to-top@^1.5.2":
+  version "1.5.2"
+  resolved "https://registry.npm.taobao.org/@vuepress/plugin-back-to-top/download/@vuepress/plugin-back-to-top-1.5.2.tgz#d253be7f0b7c2b59ca8fabe10c2f517c96d83b0e"
+  integrity sha1-0lO+fwt8K1nKj6vhDC9RfJbYOw4=
+  dependencies:
+    lodash.debounce "^4.0.8"
+
+"@vuepress/plugin-medium-zoom@^1.5.2":
+  version "1.5.2"
+  resolved "https://registry.npm.taobao.org/@vuepress/plugin-medium-zoom/download/@vuepress/plugin-medium-zoom-1.5.2.tgz#d7445ed8e8ba0cec9fb9c4c91a880b4e7fd66d91"
+  integrity sha1-10Re2Oi6DOyfucTJGogLTn/WbZE=
+  dependencies:
+    medium-zoom "^1.0.4"
+
+lodash.debounce@^4.0.8:
+  version "4.0.8"
+  resolved "https://registry.npm.taobao.org/lodash.debounce/download/lodash.debounce-4.0.8.tgz?cache=0&sync_timestamp=1571657605147&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Flodash.debounce%2Fdownload%2Flodash.debounce-4.0.8.tgz#82d79bff30a67c4005ffd5e2515300ad9ca4d7af"
+  integrity sha1-gteb/zCmfEAF/9XiUVMArZyk168=
+
+medium-zoom@^1.0.4:
+  version "1.0.5"
+  resolved "https://registry.npm.taobao.org/medium-zoom/download/medium-zoom-1.0.5.tgz#81413dda20ccdd857141ff420cfab788dd32e20e"
+  integrity sha1-gUE92iDM3YVxQf9CDPq3iN0y4g4=

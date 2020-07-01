@@ -10,8 +10,6 @@ IE盒模型：属性width、height包含border和padding，指的是content+padd
 
 在浏览器中使用何种盒模型可以通过box-sizing控制。
 
-**box-sizing**
-
 box-sizing有3个值：
 
 - content-box（默认值：标准盒模型）
