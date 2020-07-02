@@ -13,6 +13,12 @@ module.exports = {
   ],
   plugins: [
     [
+      '@vuepress/google-analytics',
+      {
+        'ga': 'UA-135701184-2' 
+      }
+    ],
+    [
       '@vssue/vuepress-plugin-vssue', 
       {
         locale: 'zh',
