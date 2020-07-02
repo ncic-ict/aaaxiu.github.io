@@ -12,9 +12,25 @@ module.exports = {
     '.vuepress/config.js', // 使用相对路径
   ],
   plugins: [
+    [
+      '@vssue/vuepress-plugin-vssue', 
+      {
+        locale: 'zh',
+        platform: 'github',
+        owner: 'aaaxiu',
+        repo: 'aaaxiu.github.io',
+        clientId: 'fae53e244022d47c67b5',
+        clientSecret: '5e889a5769ce43575d4e0425ae63c5b97db4e720',
+      }
+    ],
     '@vuepress/back-to-top',
     '@vuepress/medium-zoom'
   ],
+  // locals: {
+  //   '/': {
+  //     lang: 'zh-CN'
+  //   }
+  // },
   themeConfig: {
     activeHeaderLinks: false, // 默认值：true
     smoothScroll: true, // 启动页面滚动
@@ -48,8 +64,9 @@ module.exports = {
           title: 'CSS',
           collapsable: false,
           children: [
-            ['css/CSS基础.md', 'CSS基础'],
-            ['css/CSS3伪类.md', 'CSS3伪类'],
+            ['css/Css基础.md', 'Css基础'],
+            ['css/Css3和Html5新特性不完全手册.md', 'Css3和Html5新特性不完全手册'],
+            ['css/Css3伪类.md', 'Css3伪类'],
           ]
         },
         {
@@ -91,6 +108,7 @@ module.exports = {
           collapsable: false,
           children: [
             ['一行代码实现时间戳转时分秒.md', '一行代码实现时间戳转时分秒'],
+            ['饿了么Dialog组件二次封装.md', '饿了么Dialog组件二次封装'],
             ['椭圆运动轨迹.md', '椭圆运动轨迹'],
             ['常用scss函数表.md', '常用scss函数表'],
             ['公共方法汇总.md', '公共方法汇总'],
