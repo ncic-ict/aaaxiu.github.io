@@ -72,7 +72,7 @@ module.exports = {
             ['vue/Vue_history模式配置.md', 'Vue_history模式配置'],
             ['vue/Vue实战项目总结.md', 'Vue实战项目总结'],
             ['vue/Element远程搜索Bug.md', 'Element远程搜索Bug'],
-            ['vue/Vue面试题.md', 'Vue面试题'],
+            ['vue/Vue面试题汇总.md', 'Vue面试题汇总'],
           ]
         },
         {
