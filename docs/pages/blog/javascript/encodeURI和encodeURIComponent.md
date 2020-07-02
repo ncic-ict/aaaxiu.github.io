@@ -28,3 +28,7 @@ encodeURIComponent()用于对URL的组成部分进行个别编码，因此在上
 
 
 
+
+
+<Vssue :title="$title" />
+

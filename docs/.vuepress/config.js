@@ -26,11 +26,6 @@ module.exports = {
     '@vuepress/back-to-top',
     '@vuepress/medium-zoom'
   ],
-  // locals: {
-  //   '/': {
-  //     lang: 'zh-CN'
-  //   }
-  // },
   themeConfig: {
     activeHeaderLinks: false, // 默认值：true
     smoothScroll: true, // 启动页面滚动

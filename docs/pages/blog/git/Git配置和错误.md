@@ -95,3 +95,7 @@ fatal: Could not read from remote repository.
 
 3. git默认忽略文件名大小写因此无法监听到改变，~~需要运行`git config core.ignorecase false`禁止忽略大小写就可以监听到文件名改变了。~~（这个方法不推荐使用，在更新资源的时候会有问题。）好的方法是执行`git mv [oldfilename] [newfilename]`，此时文件为renamed状态，再提交就可以了。
 
+
+
+
+<Vssue :title="$title" />

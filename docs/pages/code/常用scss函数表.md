@@ -92,3 +92,9 @@ $primaryColor: #2c3e50;
   visibility: hidden;
 }
 ```
+
+
+
+
+
+<Vssue :title="$title" />

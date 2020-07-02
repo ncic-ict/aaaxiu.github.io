@@ -134,3 +134,8 @@ export default {
 }
 </script>
 ```
+
+
+
+
+<Vssue :title="$title" />

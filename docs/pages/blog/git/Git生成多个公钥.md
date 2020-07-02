@@ -41,3 +41,4 @@ User your_email@example.com
 
 
 
+<Vssue :title="$title" />

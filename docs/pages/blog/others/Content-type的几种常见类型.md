@@ -92,3 +92,9 @@ Content-Type: text/xml
     </params> 
 </methodcall> 
 ```
+
+
+
+
+
+<Vssue :title="$title" />
