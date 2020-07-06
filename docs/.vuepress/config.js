@@ -47,7 +47,7 @@ module.exports = {
       { text: 'Home', link: '/'},
       { text: '博文', link: '/pages/blog/javascript/Webpack配置指南.md' }, // 内部链接 以docs为根目录
       { text: '代码块', link: '/pages/code/一行代码实现时间戳转时分秒.md'},
-      // { text: '读JavaScript高级程序设计', link: '/pages/javascript_programme/Javascript简介.md' },
+      // { text: '读《JS高程》', link: '/pages/js-programme/Javascript简介.md' },
       { text: 'GitHub', link: 'https://github.com/aaaxiu'}  
     ],
     sidebar: {
@@ -124,7 +124,7 @@ module.exports = {
           ]
         }
       ],
-      // '/pages/javascript_programme/': [
+      // '/pages/js-programme/': [
       //   ['javascript简介.md', 'javascript简介'],
       //   ['在HTML中使用javascript.md', '在HTML中使用javascript']
       // ]

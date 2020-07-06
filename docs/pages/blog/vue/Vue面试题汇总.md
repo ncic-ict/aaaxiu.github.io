@@ -158,6 +158,74 @@ vue在浏览器中的渲染在不是SSR的情况下对SEO并不友好，因为�
 
 vue采用虚拟DOM技术，不要用户频繁操作DOM，性能更好。
 
+### Vuex中mutations和actions的区别？
+
+#### Mutation
+
+更改 Vuex 的 store 中的状态的唯一的方法是提交 mutation。Vuex 中的 mutation 非常类似于事件：每个 mutation 都有一个字符串的 事件类型 (type) 和 一个 回调函数 (handler)。这个回调函数就是我们实际进行状态更改的地方，并且它会接受 state 作为第一个参数：
+
+```js
+const store = new Vuex.Store({
+  state: {
+    count: 1
+  },
+  mutations: {
+    increment (state) {
+      // 变更状态
+      state.count++
+    }
+  }
+})
+```
+
+通过 store.commit 调用 mutation。
+
+```js
+store.commit('increment')
+```
+
+mutation 必须是同步函数，在异步函数的回调中更改 state 是不可跟踪的。
+
+#### Action
+
+action 在 Vuex 中是一个架构性的概念，它不是必须的。Action 提交的是 mutation，而不是直接变更状态。
+
+```js
+const store = new Vuex.Store({
+  state: {
+    count: 0
+  },
+  mutations: {
+    increment (state) {
+      state.count++
+    }
+  },
+  actions: {
+    // context 对象与 store 有相同的方法和属性，由于有 Module 的存在，因此 context 并不等同与 store。
+    increment (context) {
+      context.commit('increment')
+    }
+  }
+})
+```
+
+Action 通过 store.dispatch 触发：
+
+```js
+store.dispatch('increment')
+```
+
+Action 和 Mutation 的不同之处在于 我们可以在 Action 中处理异步请求，毕竟它最终是通过 Mutation 来改变应用状态的，我们只需要保证 Mutation 是同步就 ok 了。
+
+```js
+actions: {
+  incrementAsync ({ commit }) {
+    setTimeout(() => {
+      commit('increment')
+    }, 1000)
+  }
+}
+```
 
 
 
