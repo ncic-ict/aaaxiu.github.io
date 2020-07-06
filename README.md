@@ -4,9 +4,9 @@
 
 ### 项目启动和打包方式
 
-1. `yarn dev` 直接启动项目，如果没有全局安装 `yarn` 和 `vuepress` 先把它们安装再执行。不需要下载node_modules（ vuepress 有默认的热更新模块，但修改 .vuepress/config.js 配置文件并不会同步更新 ）。
+1. `yarn` 下载相关模块，`yarn dev` 启动项目。
 
-2. 有两个分支， `master` 存放的是生成的静态文件， `source_code` 存放的是网站的原始文件，一般来说不需要去切换分支，只需要在 `source_code` 上开发就好，完成之后提交和 push。
+2. 有两个分支， `master` 存放的是生成的静态文件， `source_code` 存放的是网站的原始文件，已修改默认分支为 `source_code`。一般来说不需要去切换分支，只需要在 `source_code` 上开发就好，完成之后暂存、提交和 push。
 
 3. 生成静态文件只需要执行 `yarn deploy` 即可打包并发布到 github（无论你当前在哪个分支，它执行的是项目目录下的 deploy.sh 文件 ）。但是需要注意的是 `yarn deploy` 依赖于 GitBash，也就是说要在 git 的命令行中运行。
 
@@ -74,8 +74,16 @@
 
   另外还有 warning 、danger 、 details 。
 
+### 添加的 vuepress 相关插件
+
+- "@vuepress/plugin-back-to-top": 返回顶部
+- "@vuepress/plugin-google-analytics": 谷歌应用分析
+- "@vuepress/plugin-medium-zoom": 图片缩放
+
+相关配置查看 [config.js](https://github.com/aaaxiu/aaaxiu.github.io/blob/source_code/docs/.vuepress/config.js#L13)
+
 ### 问题
 
-1. 为什么只有一次提交记录
+1. 为什么 master 只有一次提交记录
 
-> 主干是dist目录下的文件，每次打包都会删除dist后重新打包，因此 .git 文件也一并删除了，所以总是只有一次提交记录。
+> master 是dist目录下的文件，每次打包都会删除dist后重新打包，因此 .git 文件也一并删除了，所以总是只有一次提交记录。

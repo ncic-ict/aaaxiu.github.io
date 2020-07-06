@@ -16,6 +16,7 @@ git init
 git add -A
 git commit -m 'deploy'
 
+# 默认分支为source_code
 # 如果发布到 https://<USERNAME>.github.io  USERNAME=你的用户名 
 git push -f git@github.com:aaaxiu/aaaxiu.github.io.git master
 
