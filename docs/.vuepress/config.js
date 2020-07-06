@@ -10,14 +10,6 @@ module.exports = {
   extraWatchFiles: [
     '.vuepress/config.js', // 使用相对路径
   ],
-  configureWebpack: {
-    resolve: {
-      alias: {
-        '@blog': 'docs/pages/blog',
-        '@code': 'docs/pages/code'
-      }
-    }
-  },
   plugins: [
     [
       '@vuepress/google-analytics',
